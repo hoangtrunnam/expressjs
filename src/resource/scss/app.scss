@@ -1,0 +1,11 @@
+@import 'variables';
+.test {
+    font-size:20px;
+    background-color: red;
+    color: black;
+
+}
+
+.title {
+    color: $red-color;
+}

@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 const path = require('path')
 const route = require('./routes/index')
-// import { connect } from './config/db/index'
 const db = require('./config/db/index')
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, 'public')))

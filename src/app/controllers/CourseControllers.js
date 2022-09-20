@@ -49,7 +49,7 @@ show(req, res, next) {
     }
     // [delete] /courses/:id
     destroy(req, res, next) {
-      Course.deleteOne({_id: req.params.id}, req.body)
+      Course.delete({_id: req.params.id}, req.body)
         .then(() => {
           res.redirect('back') // chuyển lại chính trang đó
         })

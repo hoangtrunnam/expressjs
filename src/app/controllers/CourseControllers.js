@@ -47,6 +47,14 @@ show(req, res, next) {
         })
         .catch(next)
     }
+    // [delete] /courses/:id
+    destroy(req, res, next) {
+      Course.deleteOne({_id: req.params.id}, req.body)
+        .then(() => {
+          res.redirect('back') // chuyển lại chính trang đó
+        })
+        .catch(next)
+    }
 }
 
 module.exports = new CourseControllers

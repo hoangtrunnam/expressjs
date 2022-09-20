@@ -9,18 +9,15 @@ show(req, res, next) {
         res.render('course/show', {course: mongooseToObject(course)});
     })
     .catch(next)
-
-    // res.send(`course detail ${req.params.slug}`);
   }
 
   // [get] /courses/create
   create(req, res, next) {
     res.render('course/create')
   }
+
   // [post] /courses/store
   store(req, res, next) {
-    // console.log('data la:', req);
-    // res.json(req.body);
     const body = req.body;
     body.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCRI0rU4fuwyYW62bGslWrXAHDNUQ`
     const course = new Course(body)
@@ -32,6 +29,25 @@ show(req, res, next) {
         console.log('err', err);
       })
   }
+
+    // [get] /courses/:id/edit
+    edit(req, res, next) {
+      Course.findById(req.params.id)
+        .then(courseById => {
+          res.render('course/edit', {course: mongooseToObject(courseById)})
+        })
+        .catch(next)
+    }
+
+    // [put] /courses/:id
+    update(req, res, next) {
+      Course.updateOne({_id: req.params.id}, req.body)
+        .then(() => {
+          res.redirect('/me/stored/courses')
+        })
+        .catch(next)
+    }
 }
 
 module.exports = new CourseControllers
+
